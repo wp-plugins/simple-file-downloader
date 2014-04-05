@@ -77,10 +77,9 @@ Yes.
 
 == Screenshots ==
 
-* After you installed the plugin, button 'Add Download' is automatically added to the content editor. 
-* Click the button as shown in this screenshot http://screencast.com/t/pEtpwGlYTzW.
-* Select the file you want for download http://screencast.com/t/eCZc040LqLE.
-* Download shortcode will be generated automatically http://screencast.com/t/WNtBrjJZNo.
+1. Click the button to select file
+2. Select the file you want for download
+3. Download shortcode will be automatically generated
 
 == Upgrade Notice ==
 none
