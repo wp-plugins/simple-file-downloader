@@ -17,9 +17,9 @@ Allows all your site visitors to download any files from your website without an
 
 = Features =
 
-* Downloader button is available in your admin content editor. Button is available for post, page & post type
-* Insert download links via shortcode [media-downloader] to any posts, pages or custom post types
-* Allow users to directly download in all file formats for free
+* Downloader button is available in your admin content editor for post, page or post type. Shortcode will be generated automatically.
+* Insert download links manually via shortcode [media-downloader] to any posts, pages or custom post types. Check for more parameters below (Embedding).
+* Allow users to directly download in all file formats for free.
 * No file size limit for downloads.
 For more information please check the [Simple File Downloader](http://phplugins.softanalyzer.com/simple-file-downloader/) documentation page
 
