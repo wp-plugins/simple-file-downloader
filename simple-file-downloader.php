@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Simple File Downloader
-Version: 1.0.0
+Version: 1.0.1
 Plugin URI: http://phplugins.softanalyzer.com/simple-file-downloader
 Author: eugenealegiojo
 Author URI: http://wpdevph.com
