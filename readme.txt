@@ -3,8 +3,8 @@ Contributors: eugenealegiojo
 Donate link: http://phplugins.softanalyzer.com/simple-file-downloader
 Tags: simple, file, library, downloader, downloads, media, digital, download
 Requires at least: 3.0
-Tested up to: 3.8.1
-Stable tag: 1.0.0
+Tested up to: 3.8.2
+Stable tag: 1.0.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -17,7 +17,7 @@ Allows all your site visitors to download any files from your website without an
 
 = Features =
 
-* Downloader button is available in your admin content editor
+* Downloader button is available in your admin content editor. Button is available for post, page & post type
 * Insert download links via shortcode [media-downloader] to any posts/pageas
 * Allow users to directly download in all file formats for free
 * No file size limit for downloads.
@@ -74,6 +74,10 @@ Yes.
 
 Yes.
 
+= Can this plugin be able to track the downloads? =
+
+No.
+
 
 == Screenshots ==
 
@@ -81,10 +85,19 @@ Yes.
 2. Select the file you want for download
 3. Download shortcode will be automatically generated
 
-== Upgrade Notice ==
-none
+
 
 == Changelog ==
 
-= 1.0.0 =
+= 1.0.1 =
+* Fixed the bug where the selection of file location does not work for Add New post, page and post-type (add-edit)
+* Make sure that everything works for all post types.
+* Added js validation when no file is selected.
+
+= 1.0 =
+* Initial release
+
+== Upgrade Notice ==
+
+= 1.0 =
 * Initial release

@@ -18,6 +18,8 @@ if ( !class_exists('SIMPLE_FILE_DOWNLOADER') ) {
 
 	class SIMPLE_FILE_DOWNLOADER {
 		
+		var $is_supported = false;
+		
 		public function __construct(){
 			// TO DO: Add submenu for options
 			//add_action('admin_menu', array(&$this, 'sdf_menu_options'));
@@ -45,11 +47,26 @@ if ( !class_exists('SIMPLE_FILE_DOWNLOADER') ) {
 			//add_action('plugins_loaded', array(&$this,'sfd_plugins_loaded'), 10, 2 );
 		}
 		
+		/*
+		 * Check if the current screen is supported. Making sure it works for posts, pages & post_types
+		 *
+		 * @return boolean $this->is_supported
+		 */
+		function is_screen_supported(){
+			global $current_screen;
+			$current_screen = get_current_screen();
+			if( $current_screen->base == 'post' ) 
+				return true;
+			else 
+				return false;
+		}
+		
 		/**
 		 * Admin footer scripts
 		 */		
 		function admin_footer_scripts( $hook ){
-			if ( !in_array($hook, array('edit.php', 'post.php') ) ) return;
+			global $current_screen;
+			if( !$this->is_screen_supported() ) return false;
 			
 			wp_enqueue_script( 'sfd_admin_script', SFD_URL . '/js/admin.js' );
 			wp_localize_script( 'sfd_admin_script', 'adminParam', array( 'ajaxURL' => admin_url('admin-ajax.php') ) );
@@ -83,6 +100,8 @@ if ( !class_exists('SIMPLE_FILE_DOWNLOADER') ) {
 		 * @return string $context
 		 */	
 		function editor_download_button(){
+			if( !$this->is_screen_supported() ) return false;
+			
 			//path to my icon
 			$img = SFD_URL . '/images/download-16x16.png';
 
@@ -105,8 +124,7 @@ if ( !class_exists('SIMPLE_FILE_DOWNLOADER') ) {
 		 * @return string $content
 		 */
 		function add_inline_popup_content() {
-			$current_screen = get_current_screen();
-			if( !in_array($current_screen->id, array('page', 'post')) ) return;
+			if( !$this->is_screen_supported() ) return false;
 			
 			$content = '<div id="sfd_download_container" style="display:none;">
 					<div class="file-download-wrap">
@@ -167,7 +185,7 @@ if ( !class_exists('SIMPLE_FILE_DOWNLOADER') ) {
 				$return_data['message'] = $html;
 				$return_data['error'] = 0;
 			} else {
-				$return_data['message'] = '<option value="">-'. __('No files found in this category.', 'sfd') .'-</option>';
+				$return_data['message'] = '<option value="">-'. __('No files found.', 'sfd') .'-</option>';
 				$return_data['error'] = 1;
 			} // endif
 			
