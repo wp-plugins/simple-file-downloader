@@ -3,8 +3,8 @@ Contributors: eugenealegiojo
 Donate link: http://phplugins.softanalyzer.com/simple-file-downloader
 Tags: simple, file, library, downloader, downloads, media, digital, download
 Requires at least: 3.0
-Tested up to: 3.9
-Stable tag: 1.0.1
+Tested up to: 4.0
+Stable tag: 1.0.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -88,6 +88,11 @@ No.
 
 
 == Changelog ==
+
+= 1.0.2 =
+* Bug fixed where context parameter was missing when adding media button which results to overwriting the other media buttons. Credits to 3bcto for finding the bug.
+* Added method to read the downloaded file chunk by chunk for large download files.
+* Added free license details.
 
 = 1.0.1 =
 * Fixed the bug where the selection of file location does not work for Add New post, page and post-type (add-edit)

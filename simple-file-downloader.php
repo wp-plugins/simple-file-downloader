@@ -1,11 +1,27 @@
 <?php
 /*
 Plugin Name: Simple File Downloader
-Version: 1.0.1
+Version: 1.0.2
 Plugin URI: http://phplugins.softanalyzer.com/simple-file-downloader
 Author: eugenealegiojo
 Author URI: http://wpdevph.com
 Description: Simplest way to add download links into your posts/pages.
+License:
+
+  Copyright 2014 Eugene A. (eugene@wpdevph.com)
+
+  This program is free software; you can redistribute it and/or modify
+  it under the terms of the GNU General Public License, version 2, as 
+  published by the Free Software Foundation.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+
+  You should have received a copy of the GNU General Public License
+  along with this program; if not, write to the Free Software
+  Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
 if ( !defined('SFD_URL') )
@@ -97,9 +113,10 @@ if ( !class_exists('SIMPLE_FILE_DOWNLOADER') ) {
 		 * Add custom media button for download file. This button will display popup that allows us to... 
 		 * ...select file and generate shortcode to be inserted automatically in content editor.
 		 *
+		 * @param string $context
 		 * @return string $context
 		 */	
-		function editor_download_button(){
+		function editor_download_button( $context ){
 			if( !$this->is_screen_supported() ) return false;
 			
 			//path to my icon
@@ -111,11 +128,11 @@ if ( !class_exists('SIMPLE_FILE_DOWNLOADER') ) {
 			//our popup's title
 			$title = 'Add Downloader Link';
 
-			//append the icon
+			// HTML for new button
 			$context .= "<a class='thickbox button sfd_download_link' title='{$title}' href='#TB_inline?width=400&height=500&inlineId={$container_id}'>
 						<img src='{$img}' / style='padding-bottom: 5px;'><span class='sfd_download_icon'>Add Download</span></a>";
-		  
-			return $context;
+		  	
+		  	echo $context;
 		}
 		
 		/**
@@ -268,10 +285,40 @@ if ( !class_exists('SIMPLE_FILE_DOWNLOADER') ) {
 					header('Content-Transfer-Encoding: binary');
 					header('Content-Length: '. @filesize($file_name) );	// provide file size
 					header('Connection: close');
-					readfile($file_name);		// push it out
+					readfileChunked( $file_name );		// push it out
 					die();		
 				}
 			}	
+		}
+
+		/**
+  		 * Read a file and display its content chunk by chunk to address the large file download
+  		 * 
+  		 * @param string $filename Required
+  		 * @param boolean $retbytes Default: true
+		 */
+		function readfileChunked($filename, $retbytes=true){
+			$chunksize = 1*(1024*1024);
+			$buffer = '';
+			$cnt = 0;
+			$handle = fopen($filename, 'rb');
+			if ($handle === false) {
+				return false;
+			}
+			while (!feof($handle)) {
+				$buffer = fread($handle, $chunksize);
+				echo $buffer;
+				ob_flush();
+				flush();
+				if ($retbytes) {
+					$cnt += strlen($buffer);
+				}
+			}
+			$status = fclose($handle);
+			if ($retbytes && $status) {
+				return $cnt; // return num. bytes delivered like readfile() does.
+			}
+			return $status;
 		}
 		
 		/**
@@ -299,7 +346,5 @@ if ( !class_exists('SIMPLE_FILE_DOWNLOADER') ) {
 				
 	}	// end class SIMPLE_FILE_DOWNLOADER
 	
-	$SimpleFileDownloader = new SIMPLE_FILE_DOWNLOADER();
+	new SIMPLE_FILE_DOWNLOADER();
 }
-
-
