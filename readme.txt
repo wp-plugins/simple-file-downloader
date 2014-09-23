@@ -4,7 +4,7 @@ Donate link: http://phplugins.softanalyzer.com/simple-file-downloader
 Tags: simple, file, library, downloader, downloads, media, digital, download
 Requires at least: 3.0
 Tested up to: 4.0
-Stable tag: 1.0.2
+Stable tag: 1.0.2.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -88,6 +88,9 @@ No.
 
 
 == Changelog ==
+
+= 1.0.2.1 =
+* IMPORTANT Update: Fixed the blank screen bug.
 
 = 1.0.2 =
 * Bug fixed where context parameter was missing when adding media button which results to overwriting the other media buttons. Credits to 3bcto for finding the bug.
