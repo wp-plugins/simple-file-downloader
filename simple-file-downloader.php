@@ -285,7 +285,7 @@ if ( !class_exists('SIMPLE_FILE_DOWNLOADER') ) {
 					header('Content-Transfer-Encoding: binary');
 					header('Content-Length: '. @filesize($file_name) );	// provide file size
 					header('Connection: close');
-					readfileChunked( $file_name );		// push it out
+					$this->readfileChunked( $file_name );		// push it out
 					die();		
 				}
 			}	
