@@ -233,7 +233,7 @@ if ( !class_exists('SIMPLE_FILE_DOWNLOADER') ) {
 			if ( $media_id > 0 ) {
 				$link_class = (!empty($class)) ? ' class="'. $class .'"' : '';
 				$texts = (!empty($image_url)) ? '<img src="'. $image_url .'" />' : $texts;
-				$download_link = '<a href="'. get_bloginfo('wpurl') .'?media_dl='. $media_id .'"'.$link_class.'>'. $texts .'</a>';
+				$download_link = '<a href="'. site_url('?media_dl=') . $media_id .'"'.$link_class.'>'. $texts .'</a>';
 				
 				$get_media_item = wp_get_attachment_url( $media_id );
 				$uploads = wp_upload_dir();
